@@ -1,0 +1,88 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: 'Pull Request to GitHub'
+
+on: workflow_dispatch
+
+env:
+  PR_BRANCH: 'google-github-actions/update-${{github.sha}}'
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v3
+        with:
+          path: ./example-workflows
+
+      - name: 'Setup go'
+        uses: actions/setup-go@v3
+        with:
+          go-version: '^1.17.7'
+
+      - name: 'Checkout Starter Workflows'
+        uses: actions/checkout@v3
+        with:
+          repository: actions/starter-workflows
+          ref: main
+          path: ./starter-workflows
+
+      - name: 'Create New Branch'
+        working-directory: ./starter-workflows
+        run: git checkout -b $PR_BRANCH
+
+      - name: 'Update Files'
+        working-directory: ./example-workflows
+        run: go run scripts/release.go
+      
+      - name: 'Git Status'
+        working-directory: ./starter-workflows
+        run: git status
+
+      # - name: 'Push Branch to Remote'
+      #   working-directory: ./starter-workflows
+      #   run: git push origin main
+
+      # - name: 'Create Pull Request'
+      #   uses: actions/github-script@6.0.0
+      #   with:
+      #     script: |
+      #       const output = `
+      #       ## Update Google GitHub Actions Starter Workflows
+
+      #       ### **NOTE: This is an automated pull request.**
+
+      #       This pull request was created by the Google GitHub Actions team.
+
+      #       Please refer to the https://github.com/google-github-actions/example-workflows for more information.
+      #       `;
+
+      #       const response = await github.rest.pulls.create({
+      #         owner: `actions`,
+      #         repo: `starter-workflows`,
+      #         title: `Update Google GitHub Actions Starter Workflows`,
+      #         head: `${{env.PR_BRANCH}}`,
+      #         base: `main`,
+      #         maintainer_can_modify: true,
+      #         body: output
+      #       });
+      #
+      #       console.log(`Pull Request #: ${response.number}`)
+      #       console.log(`HTML URL      : ${response.html_url}`)
+      #
+      #       console.log(`Response: `)
+      #       console.log(response)
+

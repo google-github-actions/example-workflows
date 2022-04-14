@@ -1,0 +1,7 @@
+{
+  "name": "{{ .WorkflowID }}",
+  "description": "{{ .WorkflowID }} - A new workflow template.",
+  "creator": "Google Cloud",
+  "iconName": "google-cloud",
+  "categories": []
+}
