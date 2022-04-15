@@ -1,0 +1,20 @@
+{
+  "cloudrun-docker": {
+    "starter": true,
+    "type": "deployments",
+    "workflowPath": "workflows/deploy-cloudrun/cloudrun-docker.yml",
+    "propertiesPath": "properties/cloudrun-docker.properties.json"
+  },
+  "cloudrun-source": {
+    "starter": true,
+    "type": "deployments",
+    "workflowPath": "workflows/deploy-cloudrun/cloudrun-source.yml",
+    "propertiesPath": "properties/cloudrun-source.properties.json"
+  },
+  "gke-build-deploy": {
+    "starter": true,
+    "type": "deployments",
+    "workflowPath": "workflows/get-gke-credentials/gke-build-deploy.yml",
+    "propertiesPath": "properties/gke-build-deploy.properties.json"
+  }
+}
