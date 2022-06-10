@@ -3,5 +3,5 @@
   "description": "Deploy to Google Cloud Run by a YAML Service specification (KRM)",
   "creator": "Google Cloud",
   "iconName": "google-cloud",
-  "categories": ["Deployment", "Containers", "Cloud Run", "Serverless", "KRM", "Service Definition", "Decleartive"]
+  "categories": ["Deployment", "Containers", "Cloud Run", "Serverless", "KRM", "Service Definition", "declarative"]
 }
