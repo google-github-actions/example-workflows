@@ -12,7 +12,7 @@ This repository holds several references to example workflows and demonstrates h
 | ------------------------------------------------------------ | ------------------------- | ---------------- |
 |[cloudrun-docker](workflows/deploy-cloudrun/cloudrun-docker.yml) | ✅ | Build a Docker container, publish it to Google Artifact Registry, and deploy to Google Cloud Run. |
 |[cloudrun-source](workflows/deploy-cloudrun/cloudrun-source.yml) | ✅ | Deploy to Google Cloud Run directly from source. |
-|[cloudrun-declerative](workflows/deploy-cloudrun/cloudrun-declerative.yml) | ✅ | Deploy to Google Cloud Run by a [declarative YAML Service specification (KRM)](https://cloud.google.com/sdk/gcloud/reference/run/services/replace).  |
+|[cloudrun-declerative](workflows/deploy-cloudrun/cloudrun-declerative.yml) | ✅ | Deploy to Google Cloud Run using a [declarative YAML Service specification (KRM)](https://cloud.google.com/sdk/gcloud/reference/run/services/replace).  |
 
 ### [get-gke-credentials](workflows/get-gke-credentials/README.md)
 
