@@ -1,4 +1,10 @@
 {
+  "cloudrun-declarative": {
+    "starter": false,
+    "type": "deployments",
+    "workflowPath": "workflows/deploy-cloudrun/cloudrun-declarative.yml",
+    "propertiesPath": "properties/cloudrun-declarative.properties.json"
+  },
   "cloudrun-docker": {
     "starter": true,
     "type": "deployments",
