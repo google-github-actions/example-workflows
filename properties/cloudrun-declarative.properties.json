@@ -1,0 +1,7 @@
+{
+  "name": "Build and Deploy to Cloud Run with KRM",
+  "description": "Build a Docker container, publish it to Google Artifact Registry, and deploy to Google Cloud Run using a declarative YAML Service specification (KRM).",
+  "creator": "Google Cloud",
+  "iconName": "google-cloud",
+  "categories": ["Deployment", "Containers", "Cloud Run", "Serverless", "KRM", "Service Definition", "declarative"]
+}
