@@ -17,6 +17,12 @@
     "workflowPath": "workflows/deploy-cloudrun/cloudrun-source.yml",
     "propertiesPath": "properties/cloudrun-source.properties.json"
   },
+  "cloudrun-buildpacks": {
+    "starter": true,
+    "type": "deployments",
+    "workflowPath": "workflows/deploy-cloudrun/cloudrun-buildpacks.yml",
+    "propertiesPath": "properties/cloudrun-buildpacks.properties.json"
+  },
   "gke-build-deploy": {
     "starter": true,
     "type": "deployments",
