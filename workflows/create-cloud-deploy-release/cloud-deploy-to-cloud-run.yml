@@ -59,9 +59,9 @@
 #
 #    NOTE: You should always follow the principle of least privilege when assigning IAM roles
 #
-# 4. Create GitHub secrets for WIF_PROVIDER and WIF_SERVICE_ACCOUNT
+# 5. Create GitHub secrets for WIF_PROVIDER and WIF_SERVICE_ACCOUNT
 #
-# 5. Change the values for the PROJECT_ID, GAR_LOCATION, and REGION environment variables (below).
+# 6. Change the values for the PROJECT_ID, GAR_LOCATION, and REGION environment variables (below).
 #
 # NOTE: To use Google Container Registry instead, replace ${{ env.GAR_LOCATION }}-docker.pkg.dev with gcr.io
 #
