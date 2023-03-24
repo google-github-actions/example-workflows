@@ -108,7 +108,7 @@ jobs:
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v1'
         with:
-          project_id: '${{ secrets.PROJECT_ID }}'
+          project_id: '${{ env.PROJECT_ID }}'
 
       - name: 'Docker auth'
         run: |-
