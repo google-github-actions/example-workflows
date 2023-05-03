@@ -6,6 +6,12 @@ This repository holds several references to example workflows and demonstrates h
 
 ## Available Examples
 
+### [create-cloud-deploy-release](workflows/create-cloud-deploy-release/README.md)
+
+| Name                                                         | Starter                   | Description      |
+| ------------------------------------------------------------ | ------------------------- | ---------------- |
+|[cloud-deploy-to-cloud-run](workflows/create-cloud-deploy-release/cloud-deploy-to-cloud-run.yml) |  | Build a Docker container, publish it to Google Artifact Registry, and use Cloud Deploy to deploy to Google Cloud Run. |
+
 ### [deploy-cloudrun](workflows/deploy-cloudrun/README.md)
 
 | Name                                                         | Starter                   | Description      |
