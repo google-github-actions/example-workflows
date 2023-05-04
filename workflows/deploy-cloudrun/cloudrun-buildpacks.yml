@@ -109,16 +109,9 @@ jobs:
 
       # BEGIN - Pack download, build and publish 
 
-      # Download buildpack CLI to ubuntu runner
-      - name: "Download Buildpack Package"
-        id: "pack-download"
-        run: |
-          sudo add-apt-repository ppa:cncf-buildpacks/pack-cli
-          sudo apt-get update
-          sudo apt-get install pack-cli
-
       # Build and publish image to Artifact Registry
       - name: Build and Publish with Buildpacks
+        uses: buildpacks/github-actions/setup-pack@v5.0.0
         run: |-
           pack config default-builder gcr.io/buildpacks.builder:v1
           pack build ${{ env.SOURCE_CODE_DIRECTORY }}
