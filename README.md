@@ -16,6 +16,7 @@ This repository holds several references to example workflows and demonstrates h
 
 | Name                                                         | Starter                   | Description      |
 | ------------------------------------------------------------ | ------------------------- | ---------------- |
+|[cloudrun-buildpacks](workflows/deploy-cloudrun/cloudrun-buildpacks.yml) | ✅ | Build a container image with Buildpacks, publish it to Google Artifact Registry, and deploy to Google Cloud Run. |
 |[cloudrun-declarative](workflows/deploy-cloudrun/cloudrun-declarative.yml) |  | Build a Docker container, publish it to Google Artifact Registry, and deploy to Google Cloud Run using a declarative YAML Service specification (KRM). |
 |[cloudrun-docker](workflows/deploy-cloudrun/cloudrun-docker.yml) | ✅ | Build a Docker container, publish it to Google Artifact Registry, and deploy to Google Cloud Run. |
 |[cloudrun-source](workflows/deploy-cloudrun/cloudrun-source.yml) | ✅ | Deploy to Google Cloud Run directly from source. |
