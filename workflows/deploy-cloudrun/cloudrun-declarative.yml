@@ -107,7 +107,7 @@ jobs:
         run: |-
           export IMAGE="${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}"
           export SERVICE="${{ env.SERVICE }}"
-          envsubst < service.template.yaml > service.yaml
+          envsubst < ./workflows/deploy-cloudrun/service.template.yaml > service.yaml
 
       # Deploy Cloud Run Service from the YAML Service specification
       - name: Deploy to Cloud Run
