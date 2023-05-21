@@ -25,7 +25,7 @@
 #      roles/cloudbuild.builds.editor
 #
 #    Cloud Storage
-#      roles/storage.objectAdmin
+#      roles/storage.admin
 #
 #    Artifact Registry
 #      roles/artifactregistry.admin     (project or repository level)
