@@ -24,6 +24,9 @@
 #      roles/run.admin
 #      roles/iam.serviceAccountUser     (to act as the Cloud Run runtime service account)
 #
+#    Cloud Storage
+#      roles/storage.admin   (if using Google Container Registry (gcr) instead)
+#
 #    Artifact Registry
 #      roles/artifactregistry.admin     (project or repository level)
 #
