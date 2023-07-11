@@ -1,4 +1,10 @@
 {
+  "cloud-deploy-to-cloud-run": {
+    "starter": false,
+    "type": "deployments",
+    "workflowPath": "workflows/create-cloud-deploy-release/cloud-deploy-to-cloud-run.yml",
+    "propertiesPath": "properties/cloud-deploy-to-cloud-run.properties.json"
+  },
   "cloudrun-declarative": {
     "starter": false,
     "type": "deployments",
@@ -16,6 +22,12 @@
     "type": "deployments",
     "workflowPath": "workflows/deploy-cloudrun/cloudrun-source.yml",
     "propertiesPath": "properties/cloudrun-source.properties.json"
+  },
+  "cloudrun-buildpacks": {
+    "starter": true,
+    "type": "deployments",
+    "workflowPath": "workflows/deploy-cloudrun/cloudrun-buildpacks.yml",
+    "propertiesPath": "properties/cloudrun-buildpacks.properties.json"
   },
   "gke-build-deploy": {
     "starter": true,
