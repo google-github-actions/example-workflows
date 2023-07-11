@@ -57,6 +57,15 @@
 #    --format="value(projectNumber)")-compute@developer.gserviceaccount.com" \
 #    --role="roles/iam.serviceAccountUser"
 #
+#    If you have not already done so, the service account you are using via Workload Identity Federation
+#    additionally needs to be permitted to "ActAs" the default compute service account. Substitute
+#    your GHA service account name for [YOUR_GHA_SERVICE_ACCOUNT] in the following command:
+#
+#    gcloud iam service-accounts add-iam-policy-binding $(gcloud projects describe ${PROJECT_ID} \
+#    --format="value(projectNumber)")-compute@developer.gserviceaccount.com \
+#    --member="serviceAccount:[YOUR_GHA_SERVICE_ACCOUNT]@${PROJECT_ID}.iam.gserviceaccount.com" \
+#    --role="roles/iam.serviceAccountUser"
+#
 #    NOTE: You should always follow the principle of least privilege when assigning IAM roles
 #
 # 5. Create GitHub secrets for WIF_PROVIDER and WIF_SERVICE_ACCOUNT
