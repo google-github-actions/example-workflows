@@ -45,8 +45,8 @@
 #      roles/run.developer              (To create Cloud Run services)
 #
 #    Cloud Storage
-#      storage/object.viewer            (To read Cloud Deploy artifacts)
-#      storage/object.creator           (To write Cloud Deploy artifacts)
+#      roles/storage.objectViewer       (To read Cloud Deploy artifacts)
+#      roles/storage.objectCreator      (To write Cloud Deploy artifacts)
 #
 #    Additionally, the default compute service account requires permissions to "ActAs" itself
 #    to be able to deploy to Cloud Run. You can add this permission with the following command:
