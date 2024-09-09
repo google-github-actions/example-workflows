@@ -111,20 +111,20 @@ jobs:
       #   password: ${{ secrets.GCP_CREDENTIALS }}
 
       # BEGIN - Pack download, build and publish
-
+      - id: setup-tools
+        uses: buildpacks/github-actions/setup-tools@v5.1.0
+      - id: setup-pack
+        uses: buildpacks/github-actions/setup-pack@v5.1.0
       # Build and publish image to Artifact Registry
       - name: Build and Publish with Buildpacks
-        uses: buildpacks/github-actions/setup-pack@v5.0.0
         run: |-
           pack config default-builder gcr.io/buildpacks.builder:v1
-          pack build ${{ env.SOURCE_CODE_DIRECTORY }}
-          pack --publish  ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }}
-
+          pack build ${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE }}:${{ github.sha }} --path=${{ env.SOURCE_DIRECTORY }} --publish
       # END - Docker auth, pack download, buildpack build and publish
 
       - name: Deploy to Cloud Run
         id: deploy
-        uses: google-github-actions/deploy-cloudrun@v0
+        uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ${{ env.SERVICE }}
           region: ${{ env.REGION }}
