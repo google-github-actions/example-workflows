@@ -32,6 +32,7 @@ on:
 env:
   WORKFLOW_NAME: 'Validate Readme'
   DATADOG_CUSTOM_NAME: 'README Validation Workflow'  # Custom name for Datadog
+  env: dev
 
 jobs:
   gen-readme:
