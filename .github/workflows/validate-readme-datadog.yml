@@ -14,14 +14,7 @@
 
 name: 'Validate Readme'
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-  workflow_dispatch:
+
 
 
 env:
