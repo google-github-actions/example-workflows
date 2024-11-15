@@ -56,5 +56,5 @@ jobs:
             exit 1
           fi
        
-      - name: Print JSON
-        run: echo '{"name": "Alice", "age": 30}'
+      - name: Print Job Context as JSON
+        run: echo 'Job context is ${{ toJSON(job) }}'
