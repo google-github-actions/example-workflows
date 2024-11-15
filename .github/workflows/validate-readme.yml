@@ -24,6 +24,10 @@ on:
   workflow_dispatch:
 
 
+env:
+  WORKFLOW_NAME: 'Validate Readme'
+  DATADOG_CUSTOM_NAME: 'README Validation Workflow'  # Custom name for Datadog
+
 jobs:
   gen-readme:
     runs-on: ubuntu-latest
