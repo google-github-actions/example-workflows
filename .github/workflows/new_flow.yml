@@ -61,6 +61,7 @@ jobs:
       - name: Send Datadog Event
         uses: masci/datadog@v1
         with:
+          api-url: "https://api.us5.datadoghq.com"
           api-key: ${{ secrets.DATADOG_API_KEY }}
           logs: |
            - ddsource: "nginx"
