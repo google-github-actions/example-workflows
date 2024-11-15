@@ -21,6 +21,8 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
+
 
 jobs:
   gen-readme:
