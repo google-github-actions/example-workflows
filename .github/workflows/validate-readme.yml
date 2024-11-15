@@ -12,8 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-run-name: "Validate Readme${{ inputs.include_datadog == 'true' && ' with Datadog' || '' }}"
+name: 'New Validate Readme'
 
 on:
   push:
@@ -22,17 +21,6 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:
-    inputs:
-      include_datadog:
-        description: 'Include Datadog in the workflow name'
-        required: false
-        default: 'false'
-
-env:
-  WORKFLOW_NAME: 'Validate Readme'
-  DATADOG_CUSTOM_NAME: 'README Validation Workflow'  # Custom name for Datadog
-  env: dev
 
 jobs:
   gen-readme:
