@@ -55,3 +55,6 @@ jobs:
             echo " Run the following command to update the README: go run scripts/generate.go readme"
             exit 1
           fi
+       
+      - name: Print JSON
+        run: echo '{"name": "Alice", "age": 30}'
