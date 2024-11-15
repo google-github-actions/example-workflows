@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: 'Validate Readme'
+name: 'Validate Readme${{ inputs.include_datadog == 'true' && ' with Datadog' || '' }}'
 
 on:
   push:
@@ -22,7 +22,11 @@ on:
     branches:
       - main
   workflow_dispatch:
-
+    inputs:
+      include_datadog:
+        description: 'Include Datadog in the workflow name'
+        required: false
+        default: 'false'
 
 env:
   WORKFLOW_NAME: 'Validate Readme'
@@ -51,4 +55,3 @@ jobs:
             echo ""
             echo " Run the following command to update the README: go run scripts/generate.go readme"
             exit 1
-          fi
