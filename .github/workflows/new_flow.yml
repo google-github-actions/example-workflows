@@ -62,13 +62,10 @@ jobs:
         uses: masci/datadog@v1
         with:
           api-key: ${{ secrets.DATADOG_API_KEY }}
-          events: |
-            - title: "Workflow Run Completed"
-              text: "The workflow run for ${{ github.repository }} has completed."
-              alert_type: "info"
-              host: ${{ github.repository_owner }}
-              tags:
-                - "workflow:${{ github.workflow }}"
-                - "status:${{ job.status }}"
-                - "custom_attribute:your_value"
+          logs: |
+           - ddsource: "nginx"
+             ddtags: "env:staging,version:5.1"
+             hostname: "i-012345678"
+             message: "{\"message\":\"2019-11-19T14:37:58,995 ERROR [process.name][20081] Hello World\", \"level\":\"error\"}"
+             service: "payment"
 
