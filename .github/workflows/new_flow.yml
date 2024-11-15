@@ -58,3 +58,17 @@ jobs:
        
       - name: Print Job Context as JSON
         run: echo 'Job context is ${{ toJSON(job) }}'
+      - name: Send Datadog Event
+        uses: masci/datadog@v1
+        with:
+          api-key: ${{ secrets.DATADOG_API_KEY }}
+          events: |
+            - title: "Workflow Run Completed"
+              text: "The workflow run for ${{ github.repository }} has completed."
+              alert_type: "info"
+              host: ${{ github.repository_owner }}
+              tags:
+                - "workflow:${{ github.workflow }}"
+                - "status:${{ job.status }}"
+                - "custom_attribute:your_value"
+
