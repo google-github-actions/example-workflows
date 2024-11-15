@@ -22,11 +22,6 @@ on:
     branches:
       - main
   workflow_dispatch:
-    inputs:
-      include_datadog:
-        description: 'Include Datadog in the workflow name'
-        required: false
-        default: 'false'
 
 env:
   WORKFLOW_NAME: 'Validate Readme'
