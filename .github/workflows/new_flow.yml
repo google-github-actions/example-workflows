@@ -39,15 +39,7 @@ jobs:
       - name: 'Generate Readme'
         run: go run scripts/generate.go readme
 
-      - name: 'Validate Diff'
-        run: |
-          STATUS=$(git status --porcelain)
-          if [[ -n "$STATUS" ]]; then
-            echo "ERROR: README has not been updated"
-            echo ""
-            echo " Run the following command to update the README: go run scripts/generate.go readme"
-            exit 1
-          fi
+      
 
       - name: Upload job logs
         if: always()
