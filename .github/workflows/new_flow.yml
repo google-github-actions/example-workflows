@@ -58,18 +58,23 @@ jobs:
             exit 1
           fi
        
-      - name: Install Datadog CI library
-        run: npm install --global @datadog/datadog-ci
+  export-and-send-logs:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read  # Required to fetch workflow logs
+    steps:
+      - name: Export logs
+        id: export_logs
+        uses: actions/download-artifact@v2
+        with:
+          name: logs
+          path: ./logs
 
-      - name: Set up environment variables
-        env:
-          DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
-          DATADOG_CI_PLUGIN_TAGS: "project:my-project,env:staging,team:devops"
-        run: echo "Environment variables set for Datadog"
-
-      - name: Run Datadog CI
-        run: DATADOG_SITE=us5.datadoghq.com datadog-ci tag --level pipeline --tags send_to_datadog:${{ github.event.inputs.send_to_datadog }}
-
-
-
-
+      - name: Send logs to Datadog
+        run: |
+          for log_file in ./logs/*; do
+            curl -X POST "https://http-intake.logs.datadoghq.com/v1/input" \
+            -H "Content-Type: text/plain" \
+            -H "DD-API-KEY: ${{ secrets.DATADOG_API_KEY }}" \
+            --data-binary @"$log_file"
+          done
