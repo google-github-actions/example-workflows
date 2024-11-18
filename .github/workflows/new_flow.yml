@@ -46,7 +46,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: job-log
-          path: ./logs
+          path: .
   export-and-send-logs:
     runs-on: ubuntu-latest
     needs: gen-readme
@@ -57,7 +57,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: job-log
-          path: ./logs
+          path: .
       - name: "Display Logs"
         run: cat job-log
 
@@ -66,4 +66,4 @@ jobs:
           curl -X POST "https://http-intake.logs.us5.datadoghq.com/v1/input" \
            -H "Content-Type: text/plain" \
            -H "DD-API-KEY: $DATADOG_API_KEY" \
-           --data-binary @".logs/job-log"
+           --data-binary @"./job-log"
