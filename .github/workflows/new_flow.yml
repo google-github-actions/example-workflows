@@ -68,7 +68,7 @@ jobs:
         run: echo "Environment variables set for Datadog"
 
       - name: Run Datadog CI
-        run: DATADOG_SITE=us5.datadoghq.com datadog-ci tag --level pipeline --tags send_to_datadog:${{ github.event.inputs.include_datadog }}
+        run: DATADOG_SITE=us5.datadoghq.com datadog-ci tag --level pipeline --tags send_to_datadog:${{ github.event.inputs.send_to_datadog }}
 
 
 
