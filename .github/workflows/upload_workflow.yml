@@ -1,0 +1,44 @@
+name: Capture and Upload Logs
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      send_to_datadog:
+        description: 'Send to Datadog (true/false)'
+        required: false
+        default: 'true'
+
+
+jobs:
+  capture_logs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Up Log Redirection
+        shell: bash
+        run: |
+          # Define the log file path
+          LOG_FILE=workflow.log
+          
+          # Redirect all output to the log file
+          exec > >(tee -a "$LOG_FILE") 2>&1
+          
+          # Export the log file path for use in subsequent steps
+          echo "LOG_FILE=$LOG_FILE" >> $GITHUB_ENV
+
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run Custom Commands
+        run: |
+          echo "Executing custom commands..."
+          ls -al
+          echo "Commands execution completed."
+
+      - name: Upload Log File
+        uses: actions/upload-artifact@v3
+        with:
+          name: workflow-logs
+          path: ${{ env.LOG_FILE }}
