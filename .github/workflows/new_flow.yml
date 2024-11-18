@@ -56,17 +56,15 @@ jobs:
             exit 1
           fi
        
-      - name: Print Job Context as JSON
-        run: echo 'Job context is ${{ toJSON(job) }}'
-      - name: Send Datadog Event
-        uses: masci/datadog@v1
-        with:
-          api-url: "https://api.us5.datadoghq.com"
-          api-key: ${{ secrets.DATADOG_API_KEY }}
-          logs: |
-           - ddsource: "nginx"
-             ddtags: "env:staging,version:5.1"
-             hostname: "i-012345678"
-             message: "{\"message\":\"2019-11-19T14:37:58,995 ERROR [process.name][20081] Hello World\", \"level\":\"error\"}"
-             service: "payment"
+      - name: Install Datadog CI library
+        run: npm install --global @datadog/datadog-ci
+
+      - name: Set up environment variables
+        env:
+          DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+          DATADOG_CI_PLUGIN_TAGS: "project:my-project,env:staging,team:devops"
+        run: echo "Environment variables set for Datadog"
+
+      - name: Run Datadog CI
+        run: datadog-ci pipeline start --tags "${DATADOG_CI_PLUGIN_TAGS}"
 
