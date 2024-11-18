@@ -47,11 +47,12 @@ jobs:
             exit 1
           fi
 
-      - name: 'Upload Logs'
+      - name: Upload job logs
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: workflow-logs
-          path: ./logs/
+          name: job1-logs
+          path: /home/runner/work/_temp/_runner_file_commands/set_output
 
   export-and-send-logs:
     runs-on: ubuntu-latest
