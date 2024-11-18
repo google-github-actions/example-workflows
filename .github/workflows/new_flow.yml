@@ -66,5 +66,7 @@ jobs:
         run: echo "Environment variables set for Datadog"
 
       - name: Run Datadog CI
-        run: datadog-ci pipeline start --tags "${DATADOG_CI_PLUGIN_TAGS}"
+        run: DATADOG_SITE=us5.datadoghq.com datadog-ci tag --level pipeline --tags team:backend --tags service:rag
+
+
 
