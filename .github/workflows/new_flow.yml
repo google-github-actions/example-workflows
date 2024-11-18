@@ -57,7 +57,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: job-log
-          path: job.log
+          path: .logs/job.log
 
       - name: 'Send Logs to Datadog'
         run: |
