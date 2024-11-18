@@ -58,6 +58,8 @@ jobs:
         with:
           name: job-log
           path: job.log
+      - name: "Display Logs"
+        run: cat job.log
 
       - name: 'Send Logs to Datadog'
         run: |
