@@ -30,15 +30,13 @@ jobs:
           mkdir -p ./logs
           make build | tee -a ./logs/build.log
           
-      - name: 'Setup Go'
-        uses: actions/setup-go@v4
+      - name: 'Setup go'
+        uses: actions/setup-go@v3
         with:
           go-version: '^1.17.7'
 
       - name: 'Generate Readme'
         run: go run scripts/generate.go readme
-
-        
 
       - name: 'Validate Diff'
         run: |
@@ -46,7 +44,7 @@ jobs:
           if [[ -n "$STATUS" ]]; then
             echo "ERROR: README has not been updated"
             echo ""
-            echo "Run the following command to update the README: go run scripts/generate.go readme"
+            echo " Run the following command to update the README: go run scripts/generate.go readme"
             exit 1
           fi
 
