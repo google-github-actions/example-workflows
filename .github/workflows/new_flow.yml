@@ -16,6 +16,8 @@ name: 'New Flow With Input'
 
 env:
  IS_DATA: "true"
+ DATADOG_API_KEY: ${{ secrets.DATADOG_API_KEY }}
+
  
 on:
   push:
