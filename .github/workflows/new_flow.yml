@@ -25,9 +25,11 @@ jobs:
       - name: 'Checkout'
         uses: actions/checkout@v4
         
-      - name: Build application
+      - name: Enable automatic logging
         run: |
-          mkdir -p ./logs
+          exec > >(tee -a job.log) 2>&1
+          echo "Logging from job 1."
+          ls -la
           
       - name: 'Setup go'
         uses: actions/setup-go@v3
@@ -51,9 +53,8 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: job1-logs
-          path: /home/runner/work/_temp/_runner_file_commands/set_output
-
+          name: job-log
+          path: job.log
   export-and-send-logs:
     runs-on: ubuntu-latest
     needs: gen-readme
@@ -63,8 +64,8 @@ jobs:
       - name: 'Download Logs'
         uses: actions/download-artifact@v4
         with:
-          name: workflow-logs
-          path: ./logs/
+          name: job-log
+          path: job.log
 
       - name: 'Send Logs to Datadog'
         run: |
