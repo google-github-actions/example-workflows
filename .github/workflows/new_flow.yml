@@ -27,6 +27,7 @@ jobs:
         
       - name: Enable automatic logging
         run: |
+          touch job.log
           exec > >(tee -a job.log) 2>&1
           echo "Logging from job 1."
           ls -la
@@ -39,31 +40,30 @@ jobs:
       - name: 'Generate Readme'
         run: go run scripts/generate.go readme
 
-      
-
       - name: Upload job logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: job-log
-          path: .
+          path: job.log
+
   export-and-send-logs:
     runs-on: ubuntu-latest
     needs: gen-readme
     permissions:
-      actions: read  # Required to fetch workflow logs
+      actions: read
     steps:
       - name: 'Download Logs'
         uses: actions/download-artifact@v4
         with:
           name: job-log
-          path: .
+          path: ./logs
       - name: "Display Logs"
-        run: cat job-log
+        run: cat ./logs/job.log
 
       - name: 'Send Logs to Datadog'
         run: |
           curl -X POST "https://http-intake.logs.us5.datadoghq.com/v1/input" \
            -H "Content-Type: text/plain" \
            -H "DD-API-KEY: $DATADOG_API_KEY" \
-           --data-binary @"./job-log"
+           --data-binary @"./logs/job.log"
