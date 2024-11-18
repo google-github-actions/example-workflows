@@ -24,7 +24,12 @@ jobs:
     steps:
       - name: 'Checkout'
         uses: actions/checkout@v4
-
+        
+      - name: Build application
+        run: |
+          mkdir -p ./logs
+          make build | tee -a ./logs/build.log
+          
       - name: 'Setup Go'
         uses: actions/setup-go@v4
         with:
@@ -32,6 +37,8 @@ jobs:
 
       - name: 'Generate Readme'
         run: go run scripts/generate.go readme
+
+        
 
       - name: 'Validate Diff'
         run: |
