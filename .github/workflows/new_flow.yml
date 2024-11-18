@@ -28,8 +28,8 @@ on:
       - main
   workflow_dispatch:
     inputs:
-      include_datadog:
-        description: 'Include Datadog in the workflow name'
+      send_to_datadog:
+        description: 'Send to Datadog(true / false)'
         required: false
         default: 'false'
 
@@ -68,7 +68,8 @@ jobs:
         run: echo "Environment variables set for Datadog"
 
       - name: Run Datadog CI
-        run: DATADOG_SITE=us5.datadoghq.com datadog-ci tag --level pipeline --tags team:backend --tags service:rag
+        run: DATADOG_SITE=us5.datadoghq.com datadog-ci tag --level pipeline --tags send_to_datadog:${{ github.event.inputs.include_datadog }}
+
 
 
 
