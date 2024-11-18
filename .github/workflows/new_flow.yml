@@ -57,13 +57,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: job-log
-          path: .logs/job.log
+          path: job.log
 
       - name: 'Send Logs to Datadog'
         run: |
-          for log_file in ./logs/*; do
-            curl -X POST "https://http-intake.logs.datadoghq.com/v1/input" \
-              -H "Content-Type: text/plain" \
-              -H "DD-API-KEY: ${{ secrets.DATADOG_API_KEY }}" \
-              --data-binary @"$log_file"
-          done
+          curl -X POST "https://http-intake.logs.us5.datadoghq.com/v1/input" \
+           -H "Content-Type: text/plain" \
+           -H "DD-API-KEY: $DATADOG_API_KEY" \
+           --data-binary @"job.log"
