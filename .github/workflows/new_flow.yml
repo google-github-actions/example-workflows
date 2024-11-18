@@ -28,7 +28,6 @@ jobs:
       - name: Build application
         run: |
           mkdir -p ./logs
-          make build | tee -a ./logs/build.log
           
       - name: 'Setup go'
         uses: actions/setup-go@v3
