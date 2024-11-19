@@ -21,6 +21,13 @@ on:
   pull_request:
     branches:
       - main
+
+  workflow_dispatch:
+    inputs:
+      send_to_datadog:
+        description: 'Send to Datadog (true/false)'
+        type: boolean
+        default: false
 env:
  host: "ivapp"
 
@@ -38,6 +45,12 @@ jobs:
 
       - name: 'Generate Readme'
         run: go run scripts/generate.go readme
+
+      - name: "Test Boolean"
+        if: always() && ${{inputs.send_to_datadog == true}}
+        run: |
+         echo "Hi"
+         
 
       - name: 'Validate Diff'
         run: |
