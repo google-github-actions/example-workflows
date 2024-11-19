@@ -47,9 +47,10 @@ jobs:
         run: go run scripts/generate.go readme
 
       - name: "Test Boolean"
-        if: always() && ${{inputs.send_to_datadog}}
+        if: ${{inputs.send_to_datadog == true}}
         run: |
          echo "Hi"
+
          
 
       - name: 'Validate Diff'
