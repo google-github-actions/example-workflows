@@ -47,7 +47,7 @@ jobs:
         run: go run scripts/generate.go readme
 
       - name: "Test Boolean"
-        if: always() && ${{inputs.send_to_datadog == true}}
+        if: always() && ${{inputs.send_to_datadog}}
         run: |
          echo "Hi"
          
