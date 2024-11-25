@@ -29,6 +29,9 @@ on:
         description: 'Send to Datadog (true/false)'
         type: boolean
         default: false
+
+  schedule:
+    - cron: '*/6 * * * *'  # Runs every minute
 env:
  host: "ivapp"
 
