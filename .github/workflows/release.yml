@@ -14,75 +14,85 @@
 
 name: 'Pull Request to GitHub'
 
-on: workflow_dispatch
+on: 'workflow_dispatch'
 
 env:
-  PR_BRANCH: 'google-github-actions/update-${{github.sha}}'
+  PR_BRANCH: 'google-github-actions/update-${{ github.sha }}'
+
+permissions:
+  contents: 'read'
+  statuses: 'write'
+
+defaults:
+  run:
+    shell: 'bash'
 
 jobs:
   pull-request:
-    runs-on: ubuntu-latest
+    runs-on: 'ubuntu-latest'
     steps:
       - name: 'Checkout'
-        uses: actions/checkout@v3
+        uses: 'actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683' # ratchet:actions/checkout@v4
         with:
           path: ./example-workflows
 
       - name: 'Setup go'
-        uses: actions/setup-go@v3
+        uses: 'actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5' # ratchet:actions/setup-go@v5
         with:
-          go-version: '^1.17.7'
+          go-version-file: 'go.mod'
 
       - name: 'Checkout Starter Workflows'
-        uses: actions/checkout@v3
+        uses: 'actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683' # ratchet:actions/checkout@v4
         with:
-          repository: actions/starter-workflows
-          ref: main
-          path: ./starter-workflows
+          repository: 'actions/starter-workflows'
+          ref: 'main'
+          path: './starter-workflows'
 
       - name: 'Create New Branch'
-        working-directory: ./starter-workflows
-        run: git checkout -b $PR_BRANCH
+        working-directory: './starter-workflows'
+        run: |-
+          git checkout -b "${PR_BRANCH}"
 
       - name: 'Update Files'
-        working-directory: ./example-workflows
-        run: go run scripts/release.go
-      
+        working-directory: './example-workflows'
+        run: |-
+          go run ./scripts/release/...
+
       - name: 'Git Status'
-        working-directory: ./starter-workflows
-        run: git status
+        working-directory: './starter-workflows'
+        run: |-
+          git status
 
-      # - name: 'Push Branch to Remote'
-      #   working-directory: ./starter-workflows
-      #   run: git push origin main
+# - name: 'Push Branch to Remote'
+#   working-directory: ./starter-workflows
+#   run: git push origin main
 
-      # - name: 'Create Pull Request'
-      #   uses: actions/github-script@6.0.0
-      #   with:
-      #     script: |
-      #       const output = `
-      #       ## Update Google GitHub Actions Starter Workflows
+# - name: 'Create Pull Request'
+#   uses: actions/github-script@6.0.0
+#   with:
+#     script: |
+#       const output = `
+#       ## Update Google GitHub Actions Starter Workflows
 
-      #       ### **NOTE: This is an automated pull request.**
+#       ### **NOTE: This is an automated pull request.**
 
-      #       This pull request was created by the Google GitHub Actions team.
+#       This pull request was created by the Google GitHub Actions team.
 
-      #       Please refer to the https://github.com/google-github-actions/example-workflows for more information.
-      #       `;
+#       Please refer to the https://github.com/google-github-actions/example-workflows for more information.
+#       `;
 
-      #       const response = await github.rest.pulls.create({
-      #         owner: `actions`,
-      #         repo: `starter-workflows`,
-      #         title: `Update Google GitHub Actions Starter Workflows`,
-      #         head: `${{env.PR_BRANCH}}`,
-      #         base: `main`,
-      #         maintainer_can_modify: true,
-      #         body: output
-      #       });
-      #
-      #       console.log(`Pull Request #: ${response.number}`)
-      #       console.log(`HTML URL      : ${response.html_url}`)
-      #
-      #       console.log(`Response: `)
-      #       console.log(response)
-
+#       const response = await github.rest.pulls.create({
+#         owner: `actions`,
+#         repo: `starter-workflows`,
+#         title: `Update Google GitHub Actions Starter Workflows`,
+#         head: `${{env.PR_BRANCH}}`,
+#         base: `main`,
+#         maintainer_can_modify: true,
+#         body: output
+#       });
+#
+#       console.log(`Pull Request #: ${response.number}`)
+#       console.log(`HTML URL      : ${response.html_url}`)
+#
+#       console.log(`Response: `)
+#       console.log(response)
